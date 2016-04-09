@@ -30,6 +30,21 @@ var albumMarconi = {
 	]
 };
 
+// Assignment Example Album
+var albumDisney = {
+	title: 'Disney Classics',
+	artist: 'Various',
+	label: 'Walt Disney',
+	year: '2016',
+	albumArtUrl: 'assets/images/album_covers/05.png',
+	songs: [
+		{ title: 'A Whole New World', duration: '2:05'},
+		{ title: 'Colors of the Wind', duration: '1:05'},
+		{ title: 'Hakuna Matata', duration: '2:30'},
+		{ title: 'Part of Your World', duration: '1:15'}
+	]
+}
+
 var createSongRow = function(songNumber, songName, songLength) {
 	var template =
 		'<tr class="album-view-song-item">'
@@ -42,13 +57,14 @@ var createSongRow = function(songNumber, songName, songLength) {
 	return template;
 };
 
+// #1
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
 var setCurrentAlbum = function(album) {
-	// #1
-	var albumTitle = document.getElementsByClassName('album-view-title')[0];
-	var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-	var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-	var albumImage = document.getElementsByClassName('album-cover-art')[0];
-	var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
 	// #2
 	albumTitle.firstChild.nodeValue = album.title;
@@ -67,4 +83,16 @@ var setCurrentAlbum = function(album) {
 
 window.onload = function() {
 	setCurrentAlbum(albumPicasso);
+	
+	var albums = [albumPicasso, albumMarconi, albumDisney];
+	var i = 1;
+	
+	albumImage.addEventListener('click', function(event) {
+		setCurrentAlbum(albums[i]);
+		i++;
+		if (i == albums.length) {
+			i = 0;
+		};
+	});
 };
+
